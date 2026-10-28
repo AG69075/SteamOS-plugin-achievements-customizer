@@ -40,6 +40,21 @@ uncommon, under 10% earns a gold ring and glow, and under 1% gets the diamond tr
 make progress on an achievement without unlocking it yet, the toast shows a progress bar instead of
 the description.
 
+## Sounds
+
+Pick the sound that plays when you unlock something, right from the **Sound** section of the Quick
+Access menu. Besides Steam's own sound, you can choose:
+
+- **PlayStation Style**, **Xbox Style**, **Switch Style**, **Epic Style** and **GOG Style**, short
+  original jingles written in the spirit of each platform (they aren't copies).
+- **Chime** and **Sparkle**, two soft, bright tones.
+- **Xbox Rare Achievement**, a recorded sound for the rare unlocks.
+
+Selecting a sound plays a preview, and a **Volume** slider goes from 0 to 300% if the Deck's speakers
+need a boost. When a custom sound is chosen, Steam's own sound is muted so you never hear both. The
+sound plays once when a toast appears, not on every progress update. Want to hear them on a computer
+first? Open `sound-preview.html` in a browser.
+
 ## Make it yours
 
 ![The Achievement Customizer panel in the Quick Access menu](docs/screenshots/quick-access.png)
@@ -80,7 +95,7 @@ This is the quickest way, since there's nothing to download yourself.
 2. Under **Install Plugin from URL**, enter this address:
 
    ```
-   https://github.com/Hector2242/decky-plugin/releases/latest/download/achievement-customizer.zip
+   https://github.com/AG69075/SteamOS-plugin-achievements-customizer/releases/latest/download/achievement-customizer.zip
    ```
 
 3. Tap **Install**, then tap **Install** again when Decky asks you to confirm.
@@ -88,7 +103,7 @@ This is the quickest way, since there's nothing to download yourself.
 ### Install from a ZIP file
 
 1. Download `achievement-customizer.zip` from the
-   [latest release](https://github.com/Hector2242/decky-plugin/releases/latest). If you grab it on
+   [latest release](https://github.com/AG69075/SteamOS-plugin-achievements-customizer/releases/latest). If you grab it on
    another computer, copy it over to your Deck first (the Downloads folder is a good spot).
 2. In Decky's settings, open **Developer** and tap **Browse** next to **Install Plugin from ZIP
    File**.
@@ -105,7 +120,7 @@ the old version out for the new one and your colors and theme stay just the way 
 there's no need to uninstall anything first.
 
 Decky doesn't announce updates for plugins installed this way. If you'd like to hear about new
-versions, click **Watch** on the [GitHub repo](https://github.com/Hector2242/decky-plugin) and choose
+versions, click **Watch** on the [GitHub repo](https://github.com/AG69075/SteamOS-plugin-achievements-customizer) and choose
 **Custom → Releases**.
 
 ## License
