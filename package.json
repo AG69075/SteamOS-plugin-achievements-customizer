@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hector2242/decky-plugin.git"
+    "url": "git+https://github.com/AG69075/SteamOS-plugin-achievements-customizer.git"
   },
   "keywords": [
     "decky",
@@ -19,12 +19,12 @@
     "steam-deck",
     "deck"
   ],
-  "author": "Hector Mendez",
+  "author": "bloodshine",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/Hector2242/decky-plugin/issues"
+    "url": "https://github.com/AG69075/SteamOS-plugin-achievements-customizer/issues"
   },
-  "homepage": "https://github.com/Hector2242/decky-plugin#readme",
+  "homepage": "https://github.com/AG69075/SteamOS-plugin-achievements-customizer#readme",
   "devDependencies": {
     "@decky/rollup": "^1.0.2",
     "@decky/ui": "^4.11.6",
