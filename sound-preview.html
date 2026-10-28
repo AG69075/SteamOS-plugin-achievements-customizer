@@ -1,0 +1,108 @@
+<!doctype html><meta charset=utf-8><title>Sons achievement</title>
+<body style="font-family:system-ui;background:#111;color:#fff;padding:2rem">
+<h2>Écouter les sons</h2><div id=b></div>
+<script>
+const SOUND_NOTES = {
+    chime: [
+        [1318.5, 0, 0.9, 'sine', 0.35],
+        [1760, 0.12, 1.1, 'sine', 0.3],
+        [2637, 0.24, 1.3, 'sine', 0.18],
+    ],
+    sparkle: [
+        [2093, 0, 0.35, 'sine', 0.22],
+        [2637, 0.07, 0.35, 'sine', 0.2],
+        [3136, 0.14, 0.4, 'sine', 0.18],
+        [2349, 0.22, 0.35, 'sine', 0.18],
+        [3520, 0.3, 0.7, 'sine', 0.16],
+    ],
+    // Original sounds written in the spirit of each platform; not copies.
+    playstation: [
+        [1568, 0, 1.4, 'sine', 0.3],
+        [2349, 0.18, 1.4, 'sine', 0.22],
+        [3136, 0.36, 1.6, 'sine', 0.14],
+        [784, 0, 0.5, 'triangle', 0.12],
+    ],
+    xbox: [
+        [196, 0, 0.5, 'sine', 0.5],
+        [293.7, 0.02, 0.45, 'triangle', 0.25],
+        [392, 0.14, 0.6, 'sine', 0.3],
+    ],
+    switch: [
+        [1318.5, 0, 0.12, 'square', 0.12],
+        [1568, 0.1, 0.12, 'square', 0.12],
+        [2093, 0.2, 0.4, 'square', 0.13],
+        [2093, 0.2, 0.4, 'sine', 0.2],
+    ],
+    epic: [
+        [440, 0, 0.12, 'sawtooth', 0.1],
+        [659.3, 0.1, 0.12, 'sawtooth', 0.1],
+        [880, 0.2, 0.7, 'sawtooth', 0.12],
+        [1318.5, 0.2, 0.7, 'sine', 0.2],
+    ],
+    gog: [
+        [523.3, 0, 0.5, 'triangle', 0.35],
+        [659.3, 0.15, 0.5, 'triangle', 0.3],
+        [783.99, 0.3, 1.0, 'triangle', 0.35],
+        [1567.98, 0.3, 1.0, 'sine', 0.1],
+    ],
+};
+
+let audioContext;
+/** Master bus: boosts every sound, with a limiter-style compressor to avoid clipping. */
+const MASTER_GAIN = 3;
+let masterBus;
+function getMasterBus(context, volume = 100) {
+    if (!masterBus || masterBus.context !== context) {
+        const compressor = context.createDynamicsCompressor();
+        compressor.threshold.value = -6;
+        compressor.knee.value = 6;
+        compressor.ratio.value = 12;
+        compressor.attack.value = 0.003;
+        compressor.release.value = 0.15;
+        const boost = context.createGain();
+        boost.gain.value = MASTER_GAIN;
+        boost.connect(compressor).connect(context.destination);
+        masterBus = boost;
+        masterBus.context = context;
+    }
+    masterBus.gain.value = MASTER_GAIN * (volume / 100);
+    return masterBus;
+}
+/** Plays the chosen sound; 'default' (Steam's own sound) and failures are silent. */
+function playAchievementSound(name, volume = 100) {
+    const notes = SOUND_NOTES[name];
+    if (!notes)
+        return;
+    try {
+        const Context = window.AudioContext ?? window.webkitAudioContext;
+        if (!Context)
+            return;
+        audioContext = audioContext ?? new Context();
+        const context = audioContext;
+        if (context.state === 'suspended')
+            void context.resume();
+        const origin = context.currentTime + 0.02;
+        for (const [frequency, start, length, wave, gain] of notes) {
+            const oscillator = context.createOscillator();
+            const envelope = context.createGain();
+            oscillator.type = wave;
+            oscillator.frequency.value = frequency;
+            envelope.gain.setValueAtTime(0.0001, origin + start);
+            envelope.gain.exponentialRampToValueAtTime(gain, origin + start + 0.01);
+            envelope.gain.exponentialRampToValueAtTime(0.0001, origin + start + length);
+            oscillator.connect(envelope).connect(getMasterBus(context, volume));
+            oscillator.start(origin + start);
+            oscillator.stop(origin + start + length + 0.05);
+        }
+    }
+    catch (error) {
+        console.warn('[AchievementCustomizer] Could not play sound', error);
+    }
+}
+
+for (const n of Object.keys(SOUND_NOTES)) {
+  const e=document.createElement('button');e.textContent='▶ '+n;
+  e.style.cssText='font-size:1.2rem;margin:.4rem;padding:.8rem 1.2rem';
+  e.onclick=()=>playAchievementSound(n);b.appendChild(e);
+}
+</script>
