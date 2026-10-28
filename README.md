@@ -64,8 +64,13 @@ description colors, choose a gradient, solid or glass banner, and tweak the icon
 corner rounding, glow strength, shine sweep and how long the toast stays on screen.
 
 The preview at the top replays your changes as you make them. The test buttons send real
-achievement notifications through Steam, so you see and hear exactly what an unlock will look like
-without anything piling up in your notification tray.
+achievement notifications through Steam (Achievement, Rare, Ultra Rare and Progress), so you see
+exactly what an unlock will look like without anything piling up in your notification tray. Your
+chosen sound plays with the unlock tests, but not with the Progress one.
+
+You can place the toast in any of nine spots on the screen, or leave it where Steam normally shows
+it. **Rarity Effects** turns the gold and diamond treatment on or off, and **Reset to Default** at the
+bottom of the panel brings every setting back to how it started.
 
 If you've turned on Reduce Motion in Steam (Settings › Accessibility), toasts fade gently instead of
 moving around. Switch on **Animate anyway** in the plugin if you'd still like the full animations.
